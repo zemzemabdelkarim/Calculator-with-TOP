@@ -34,6 +34,19 @@ const operate = function(x, op, y){
     }
 }
 
+const buttons = document.querySelectorAll("button");
+buttons.forEach((btn)=>{
+    btn.addEventListener("click",(e)=>{
+        console.log(e.target.id);
+        const result = document.querySelector(".result");
+        result.textContent += e.target.id;
+        if(e.target.id === "="){
+            console.log(result.textContent);
+            
+        }
+    });
+});
+
 
 let firstNumber;
 let operator;
