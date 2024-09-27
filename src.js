@@ -1,11 +1,3 @@
-function wait(ms) {
-    var start = new Date().getTime();
-    var end = start;
-    while (end < start + ms) {
-        end = new Date().getTime();
-    }
-}
-
 const add = function (x, y) {
     return x + y;
 };
@@ -29,7 +21,7 @@ const operate = function (x, op, y) {
         case "-":
             return substract(x, y);
 
-        case "*":
+        case "x":
             return multiply(x, y);
 
         case "/":
@@ -41,81 +33,74 @@ const operate = function (x, op, y) {
             break;
     }
 };
-const operatorIndex = function (str) {
-    for (let i = 0; i < str.length; i++) {
-        if (
-            str[i] === "*" ||
-            str[i] === "/" ||
-            str[i] === "+" ||
-            str[i] === "-"
-        ) {
-            return i;
-        }
-    }
-    return -1;
-};
-const equalIndex = function (str) {
-    return str.indexOf("=");
-};
-const clearResult = function () {
-    const result = document.querySelector(".result");
-    result.textContent = "";
-};
 
-const buttons = document.querySelectorAll("button");
-buttons.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-        console.log(e.target.id);
-        const result = document.querySelector(".result");
-        result.textContent += e.target.id;
-        if (e.target.id === "=") {
-            //console.log(result.textContent);
-
-            //console.log("index is ", operatorIndex(result.textContent));
-            let indexOfOperator = operatorIndex(result.textContent);
-            let indexOfEqual = equalIndex(result.textContent);
-            if (indexOfEqual != result.textContent.length - 1) {
-                result.textContent = "ERROR";
-                wait(1000);
-                clearResult();
-            }
-
-            let firstNumber = parseInt(
-                result.textContent.substring(0, indexOfOperator)
-            );
-            //console.log("first number is ", firstNumber);
-            let secondNumber = parseInt(
-                result.textContent.substring(indexOfOperator, indexOfEqual)
-            );
-            //console.log("second number is ", secondNumber);
-            /*console.log(
-                operate(
-                    parseInt(firstNumber),
-                    result.textContent[operatorIndex(result.textContent)],
-                    parseInt(secondNumber)
-                )
-            );*/
-            console.log(`scondNumber = ${secondNumber}`);
-
-            if ( isNaN( firstNumber ) || isNaN( secondNumber )) {
-                result.textContent = "ERROR";
-                wait(1000);
-                clearResult();
-            } else {
-                result.textContent += operate(
-                    firstNumber,
-                    result.textContent[operatorIndex(result.textContent)],
-                    secondNumber
-                );
-            }
-        }
-
-        if (e.target.id === "c") {
-            clearResult();
-        }
+const numbers = document.querySelectorAll(".number");
+numbers.forEach((button) => {
+    button.addEventListener("click", (element) => {
+        const currentNumber = document.querySelector("#currentNumber");
+        currentNumber.textContent += element.target.id;
     });
 });
 
-let firstNumber;
-let operator;
-let secondNumber;
+const operators = document.querySelectorAll(".operator");
+operators.forEach((op) => {
+    op.addEventListener("click", (element) => {
+        const operatorContainer = document.querySelector("#operatorContainer");
+        operatorContainer.textContent = element.target.id;
+        const prevNumber = document.querySelector("#prevNumber");
+        const currentNumber = document.querySelector("#currentNumber");
+        if (currentNumber.textContent != "") {
+            prevNumber.textContent = currentNumber.textContent;
+        }
+        currentNumber.textContent = "";
+    });
+});
+
+const clear = document.querySelector("#c");
+clear.addEventListener("click", () => {
+    const operatorContainer = document.querySelector("#operatorContainer");
+    operatorContainer.textContent = "";
+    const prevNumber = document.querySelector("#prevNumber");
+    prevNumber.textContent = "";
+    const currentNumber = document.querySelector("#currentNumber");
+    currentNumber.textContent = "";
+});
+
+const equal = document.querySelector(".equal");
+equal.addEventListener("click", () => {
+    const operatorContainer = document.querySelector("#operatorContainer");
+    const prevNumber = document.querySelector("#prevNumber");
+    const currentNumber = document.querySelector("#currentNumber");
+    let state = true;
+    let firstNumber = parseInt(prevNumber.textContent);
+    let secondNumber = parseInt(currentNumber.textContent);
+    let operator = operatorContainer.textContent;
+
+    if (isNaN(firstNumber) || isNaN(secondNumber)) {
+        state = false;
+    } else if (
+        operator !== "+" &&
+        operator !== "-" &&
+        operator !== "x" &&
+        operator !== "/"
+    ) {
+        state = false;
+    }
+
+    if (state) {
+        prevNumber.textContent = `${firstNumber} ${operator} ${secondNumber}`;
+        operatorContainer.textContent = "=";
+        currentNumber.textContent = operate(
+            firstNumber,
+            operator,
+            secondNumber
+        );
+    } else {
+        const operatorContainer = document.querySelector("#operatorContainer");
+        operatorContainer.textContent = "";
+        const prevNumber = document.querySelector("#prevNumber");
+        prevNumber.textContent = "";
+        const currentNumber = document.querySelector("#currentNumber");
+        currentNumber.textContent = "ERROR";
+    }
+});

@@ -4,29 +4,35 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Calculator with top</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style.css" />
         <script src="src.js" defer></script>
     </head>
     <body>
         <div class="container">
-            <div class="result"></div>
+            <div class="result">
+                <div class="numberContainer">
+                    <p class="prevNumber" id="prevNumber"></p>
+                    <p class="currentNumber" id="currentNumber"></p>
+                </div>
+                <p class="operatorContainer" id="operatorContainer"></p>
+            </div>
             <div class="keys">
                 <div class="numbers">
-                    <button class="one" id="1">1</button>
-                    <button class="two" id="2">2</button>
-                    <button class="three" id="3">3</button>
+                    <button class="one number" id="1">1</button>
+                    <button class="two number" id="2">2</button>
+                    <button class="three number" id="3">3</button>
                     <button class="add operator" id="+">+</button>
-                    <button class="four" id="4">4</button>
-                    <button class="five" id="5">5</button>
-                    <button class="six" id="6">6</button>
+                    <button class="four number" id="4">4</button>
+                    <button class="five number" id="5">5</button>
+                    <button class="six number" id="6">6</button>
                     <button class="substract operator" id="-">-</button>
-                    <button class="seven" id="7">7</button>
-                    <button class="eight" id="8">8</button>
-                    <button class="nine" id="9">9</button>
-                    <button class="multiply operator" id="*">x</button>
-                    <button class="clear operator" id="c">C</button>
-                    <button class="zero" id="0">0</button>
-                    <button class="eqal operator" id="=">=</button>
+                    <button class="seven number" id="7">7</button>
+                    <button class="eight number" id="8">8</button>
+                    <button class="nine number" id="9">9</button>
+                    <button class="multiply operator" id="x">x</button>
+                    <button class="clear" id="c">C</button>
+                    <button class="zero number" id="0">0</button>
+                    <button class="equal" id="=">=</button>
                     <button class="divide operator" id="/">/</button>
                 </div>
             </div>

@@ -3,6 +3,11 @@ body{
     justify-content: center;
 }
 
+p{
+    margin: 5px 10px;
+    padding: 0;
+}
+
 .container{
     max-width: 700px;
     display: flex;
@@ -27,7 +32,25 @@ body{
     background-color: rgb(62, 62, 126);
     color: whitesmoke;
     font-weight: 900;
-    font-size: 60px;
+    /*font-size: 60px;*/
+    display: flex;
+    justify-content: space-between;
+
+}
+
+/*.numberContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}*/
+
+.operatorContainer{
+    text-align: center;
+}
+
+.currentNumber{
+    font-size: 40px;
 }
 
 .numbers{
@@ -67,7 +90,18 @@ button{
     font-weight: 800;
 }
 
-.operator{
+.operator, .clear, .equal{
     background-color: rgb(62, 62, 126);
     color: whitesmoke;
 }
+
+
+/*debug
+
+.currentNumber, .prevNumber{
+    border: 1px solid red;
+}
+
+.operatorContainer{
+    border: 1px solid red;
+}*/
