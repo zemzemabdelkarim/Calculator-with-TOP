@@ -90,7 +90,7 @@ button{
     font-weight: 800;
 }
 
-.operator, .clear, .equal{
+.operator, .clear, .equal, .plusorminus, .persent, .floatingpoint{
     background-color: rgb(62, 62, 126);
     color: whitesmoke;
 }

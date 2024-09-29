@@ -72,8 +72,8 @@ equal.addEventListener("click", () => {
     const prevNumber = document.querySelector("#prevNumber");
     const currentNumber = document.querySelector("#currentNumber");
     let state = true;
-    let firstNumber = parseInt(prevNumber.textContent);
-    let secondNumber = parseInt(currentNumber.textContent);
+    let firstNumber = parseFloat(prevNumber.textContent);
+    let secondNumber = parseFloat(currentNumber.textContent);
     let operator = operatorContainer.textContent;
 
     if (isNaN(firstNumber) || isNaN(secondNumber)) {
@@ -102,5 +102,28 @@ equal.addEventListener("click", () => {
         prevNumber.textContent = "";
         const currentNumber = document.querySelector("#currentNumber");
         currentNumber.textContent = "ERROR";
+    }
+});
+
+const plusorminus = document.querySelector("#plusorminus");
+plusorminus.addEventListener("click", ()=>{
+    const currentNumber = document.querySelector("#currentNumber");
+    currentNumber.textContent = "-"+currentNumber.textContent;
+});
+
+const persent = document.querySelector("#persent");
+persent.addEventListener("click", ()=>{
+    const operatorContainer = document.querySelector("#operatorContainer");
+    const prevNumber = document.querySelector("#prevNumber");
+    const currentNumber = document.querySelector("#currentNumber");
+
+    operatorContainer.textContent = "%";
+    let number = parseFloat(currentNumber.textContent);
+    if(isNaN(number)){
+        prevNumber.textContent = "";
+        currentNumber.textContent = "ERROR";
+    }else{
+        prevNumber.textContent = `${number}`;
+        currentNumber.textContent = `${number / 100}%`;
     }
 });
